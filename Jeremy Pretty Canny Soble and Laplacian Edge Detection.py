@@ -51,6 +51,12 @@ def evaluate_edge_detection(image, edge_image):
 
     return precision, recall, f1_score
 
+def display_images(images, titles):
+    for i, (image, title) in enumerate(zip(images, titles)):
+        cv2.imshow(title, image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
 if __name__ == "__main__":
     image = generate_image()
     noisy_image = add_noise(image)
@@ -64,3 +70,6 @@ if __name__ == "__main__":
             print(f"{method}: Precision={precision:.2f}, Recall={recall:.2f}, F1 Score={f1_score:.2f}")
 
         print()
+
+        # Display images
+        display_images([img, canny, sobel, laplacian], [name, "Canny Edges", "Sobel Edges", "Laplacian Edges"])
